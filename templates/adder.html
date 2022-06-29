@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" sizes="192x192" href="https://static.wixstatic.com/media/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg">
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg" type="image/jpeg"/>
+
+    <title>TOM &trade; Add Tool</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/grid.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+<!--  navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">TOM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/addtool">Add Tool</a>
+      <a class="nav-item nav-link" href="/alltools">All Tools</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+<!--      Opening-->
+<div id="opening">
+    <h1><strong>The OSINT Matrix</strong></h1>
+    <p class="lead">An information preservation framework <br> An Input/ Output based system, for reaching the tools you need and sharing tools with colleagues</p>
+    <br>
+    <h3><strong>Adding a Tool to the framework</strong></h3>
+    <ul>
+        <li><u>Name:</u> enter the name in lower case, <strong>without . or , and without spaces</strong> (hunterio not <s>hunter.io</s>) / (social_bearings not <s>social bearings</s>)</li>
+        <li><u>Photo:</u> give a URL (including https://) to a simple rectangular photo. open Google images, right-click on the desired image, choose "open image in a new tab", and copy that URL</li>
+        <li><u>Link:</u> the URL of the website (including https://), preferably its homepage or most relevant URL.</li>
+        <li><u>Date:</u> the date of today, in the format of DD/MM/YYYY</li>
+    </ul>
+    <h4>Choose the corresponding input/output setting</h4>
+    <h4><b>Always assign the same input/output in one of the assignments below (for example- FB profile, FB profile), so it can be seen amongst all other tools</b></h4>
+</div>
+
+
+<form method="POST" action="/addtool">
+
+<!--    text inputs-->
+    <div class="form-section-adder">
+      <div class="form-group">
+        <label for="toolname">Tool Name</label>
+        <input type="text" class="form-control" id="toolname" placeholder="tweet_beaver" name="toolname">
+        <small id="emailHelp" class="form-text text-muted">lowercase, and without . or ,</small>
+      </div>
+      <div class="form-group">
+        <label for="photolink">Photo link</label>
+        <input type="text" class="form-control" id="photolink" placeholder="https://pbs.twimg.com/profile_images/1283958620359516160/p7zz5dxZ.jpg" name="photolink">
+      </div>
+      <div class="form-group">
+        <label for="toollink">Tool link</label>
+        <input type="text" class="form-control" id="toollink" placeholder="https://rocketreach.co/" name="toollink">
+      </div>
+      <div class="form-group">
+        <label for="currentdate">Current Date</label>
+        <input type="text" class="form-control" id="currentdate" placeholder="14/05/1948" name="currentdate">
+      </div>
+    </div>
+
+
+<!--        tools assignment section-->
+    <div class="input-output-selects">
+    {% for num in range(1,9): %}
+    <div class="tools-assignment row">
+      <div class="form-group inputsbox">
+        <label for="inputslist">Inputs</label>
+        <select name="input_check_{{num}}" multiple class="form-control" id="inputslist">
+            {% for input in outputs: %}
+              <option>{{input}}</option>
+            {% endfor %}
+        </select>
+      </div>
+        <br>
+      <div class="form-group outputsbox">
+        <label for="outputslist">Outputs</label>
+        <select name="output_check_{{num}}" multiple class="form-control" id="outputslist">
+            {% for output in inputs: %}
+              <option>{{output}}</option>
+            {% endfor %}
+        </select>
+      </div>
+        <button type="button" class="btn btn-secondary assign-btn" disabled>{{num}}</button>
+    </div>
+    {% endfor %}
+    </div>
+<!--        tools assignment end-->
+
+
+<!--    final submit-->
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+    <br>
+    <br>
+
+</div> <!-- /container -->
+
+  </body>
+</html>
+
+<!--&lt;!&ndash;      button Inputs&ndash;&gt;-->
+<!--    <div class="grid-container">-->
+<!--      <div class="grid-item col-lg-5">-->
+<!--        <h2> Input </h2>-->
+<!--        <div class="button_row row">-->
+<!--          {% for input in inputs: %}-->
+<!--                <input type="checkbox" class="btn-check" id="btn-check1" autocomplete="off" value={{input}} name="input">-->
+<!--                <label class="btn btn-primary">{{input}}</label>-->
+<!--          {% endfor %}-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--&lt;!&ndash;     button Outputs&ndash;&gt;-->
+<!--    <div class="grid-item col-lg-5">-->
+<!--    <h2> Output </h2>-->
+<!--      <div class="button_row row">-->
+<!--        {% for output in outputs: %}-->
+<!--              <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" value={{output}} name="output">-->
+<!--              <label class="btn btn-secondary">{{output}}</label>-->
+<!--        {% endfor %}-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--&lt;!&ndash;      add button&ndash;&gt;-->
+<!--    <div class="grid-item col-lg-2">-->
+<!--        <h2>Add</h2>-->
+<!--        <div class="row">-->
+<!--            <button type="submit" class="btn btn-dark btn-sm">&#9658;</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->

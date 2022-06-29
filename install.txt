@@ -1,0 +1,9 @@
+latest python
+pip install flask
+pip install pandas
+
+
+
+
+
+in data1- the x is inputs, the y is outputs

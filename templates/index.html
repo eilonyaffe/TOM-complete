@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" sizes="192x192" href="https://static.wixstatic.com/media/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg">
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg" type="image/jpeg"/>
+
+    <title>TOM &trade;</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/grid.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+<!--  navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">TOM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/addtool">Add Tool</a>
+      <a class="nav-item nav-link" href="/alltools">All Tools</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+<!--      Opening-->
+<div id="opening">
+    <h1><strong>The OSINT Matrix</strong></h1>
+    <p class="lead">An information preservation framework <br> An Input/ Output based system, for reaching the tools you need and sharing tools with colleagues</p>
+    <br>
+    <h3><strong>How it works:</strong></h3>
+    <p class="lead">Choose an 1 input and 1 output to get the relevant tools.</p>
+    <p class="lead">You can also check the same parameter as input and output to get <b>all</b> relevant tools</p>
+</div>
+
+
+<form method="POST" action="/">
+<!--      Inputs-->
+    <div class="grid-container">
+      <div class="grid-item col-lg-5">
+        <h2> Inputs </h2>
+        <div class="button_row row">
+          {% for input in inputs: %}
+                <input type="checkbox" class="btn-check" id="btn-check1" autocomplete="off" value={{input}} name="input">
+                <label class="btn btn-primary">{{input}}</label>
+          {% endfor %}
+        </div>
+      </div>
+
+<!--      Outputs-->
+    <div class="grid-item col-lg-5">
+    <h2> Outputs </h2>
+      <div class="button_row row">
+        {% for output in outputs: %}
+              <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" value={{output}} name="output">
+              <label class="btn btn-secondary">{{output}}</label>
+        {% endfor %}
+      </div>
+    </div>
+
+
+<!--      Results-->
+    <div class="grid-item col-lg-2">
+        <h2>Results</h2>
+        <div class="row">
+                <button type="submit" class="btn btn-success btn-sm">&#9658;</button>
+        </div>
+    </div>
+    </div>
+    </form>
+
+    <br>
+    <br>
+
+</div> <!-- /container -->
+
+  </body>
+</html>

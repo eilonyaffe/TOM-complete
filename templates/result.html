@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" sizes="192x192" href="https://static.wixstatic.com/media/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg">
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/91b336_211d28deb9844a69856156b6d76a6dc3%7Emv2.jpg" type="image/jpeg"/>
+
+    <title>TOM &trade; result</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/grid.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+<!--  navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">TOM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/addtool">Add Tool</a>
+      <a class="nav-item nav-link" href="/alltools">All Tools</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+<!--      Opening-->
+<div id="opening">
+    <h1><strong>The OSINT Matrix</strong></h1>
+    <p class="lead">An information preservation framework <br> An Input/ Output based system, for reaching the tools you need and sharing tools with colleagues</p>
+    <br>
+    <h3>How it (will) work</h3>
+    <p>Choose an 1 input and 1 output to get the relevant tools.</p>
+    <p>You can also check the same parameter as input and output and get <b>all</b> relevant tools</p>
+</div>
+
+
+<form method="POST" action="/">
+<!--      Inputs-->
+    <div class="grid-container">
+      <div class="grid-item col-lg-5">
+        <h2> Inputs </h2>
+        <div class="button_row row">
+          {% for input in inputs: %}
+                <input type="checkbox" class="btn-check" id="btn-check1" autocomplete="off" value={{input}} name="input">
+                <label class="btn btn-primary">{{input}}</label>
+          {% endfor %}
+        </div>
+      </div>
+
+
+<!--      Outputs-->
+    <div class="grid-item col-lg-5">
+    <h2> Outputs </h2>
+      <div class="button_row row">
+        {% for output in outputs: %}
+              <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" value={{output}} name="output">
+              <label class="btn btn-secondary">{{output}}</label>
+        {% endfor %}
+      </div>
+    </div>
+
+
+<!--      Results-->
+<!--    results title-->
+    <div class="grid-item col-lg-2">
+        <div class="row">
+            <h2>Results</h2>
+            <form action="/result" method="post">
+                <button type="submit" class="btn btn-success btn-sm">&#9658;</button>
+             </form>
+        </div>
+
+<!--        results cards-->
+<!--    {% for tool_list in tools_in_lists: %}-->
+<!--        <div class="row">-->
+<!--            {% for tool in tool_list: %}-->
+<!--                <div class="card" style="width: 13rem;">&ndash;&gt;-->
+<!--                  <img src= {{tools_dict[tool]["photo"]}} class="card-img-top" alt="...">-->
+<!--                  <div class="card-body">-->
+<!--                  <p class="card-text">{{tool}} can show the <strong>{{output_ans}}</strong> of a <strong>{{input_ans}}</strong>!</p>-->
+<!--                  <a href={{tools_dict[tool]["link"]}}>link</a>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    {% endfor %}-->
+
+    <div class="column">
+        {% for tool in tools_dict: %}
+         <div class="card" style="width: 13rem;">-->
+          <img src= {{tools_dict[tool]["photo"]}} class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="card-text">{{tool}} can show the <strong>{{output_ans}}</strong> of a <strong>{{input_ans}}</strong>!</p>
+            <a href={{tools_dict[tool]["link"]}}>link</a>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+
+<!--        if no results-->
+    {% if dict_len < 1: %}
+      <div class="card" style="width: 13rem;">-->
+      <img src= "https://static.vecteezy.com/system/resources/previews/004/968/529/original/search-no-results-found-concept-illustration-flat-design-eps10-simple-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-with-editable-stroke-line-outline-linear-vector.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Your Input-Output entry doesn't have corresponding tools</p>
+      </div>
+    </div>
+    {% endif %}
+
+    </div>
+    </div>
+    </form>
+
+    <br>
+    <br>
+
+<!--    </div> &lt;!&ndash; /container &ndash;&gt;-->
+</div>
+  </body>
+</html>
+
+
+<!--&lt;!&ndash;        from here&ndash;&gt;-->
+<!--     <div class="card" style="width: 13rem;">&ndash;&gt;-->
+<!--      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL6Yb1Zw-ZLnhuv1TUmF25Hf8LldH05g1B3G5ACur4haPB2dyJfONzbz738ofEOd5l_-8&usqp=CAU" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <p class="card-text">Zoominfo can show the <strong>Phone number</strong> of a <strong>LinkedIn account</strong>!</p>-->
+<!--        <a href="https://www.zoominfo.com/">link</a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="card" style="width: 13rem;">-->
+<!--      <img src="data:image/png;base64,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" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <p class="card-text">Rocketreach can show the <strong>Phone number</strong> of a <strong>LinkedIn account</strong>!</p>-->
+<!--        <a href="https://rocketreach.co/person">link</a>-->
+<!--      </div>-->
+<!--    </div>-->
+
