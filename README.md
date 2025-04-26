@@ -1,6 +1,6 @@
-# TOM-complete
+# TOM
 
-**TOM-complete** is an information preservation system based on Input-Output entries. While it is designed for OSINT (Open Source Intelligence) applications, it can be adapted for other purposes.
+**TOM (The OSINT MATRIX)** is an information preservation system based on Input-Output inquiries. While it is designed for OSINT (Open Source Intelligence) applications, it can be adapted for other purposes.
 
 ## Features
 
